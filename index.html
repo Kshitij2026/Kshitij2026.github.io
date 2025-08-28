@@ -34,6 +34,10 @@
             height: 100%;
             overflow: hidden;
             z-index: 1;
+            /* Placeholder background for smooth loading */
+            background-image: url('https://placehold.co/1920x1080/111827/111827.png');
+            background-size: cover;
+            background-position: center;
         }
         .hero-video-container iframe {
             width: 100vw;
@@ -45,6 +49,9 @@
             left: 50%;
             transform: translate(-50%, -50%) scale(1.1);
             filter: blur(8px);
+            /* Start transparent and fade in */
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
         }
         .hero-overlay {
             position: absolute;
@@ -98,7 +105,7 @@
         <!-- Hero Section -->
         <section id="home" class="h-screen flex items-center justify-center text-center relative">
             <div class="hero-video-container">
-                <iframe src="https://player.vimeo.com/video/1113970872?background=1&autoplay=1&loop=1&muted=1" frameborder="0" allow="autoplay; fullscreen" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                <iframe id="hero-video" src="https://player.vimeo.com/video/1113970872?background=1&autoplay=1&loop=1&muted=1" frameborder="0" allow="autoplay; fullscreen" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             </div>
             <div class="hero-overlay"></div>
             <div class="relative z-10 container mx-auto px-6">
@@ -303,6 +310,16 @@
         animatedElements.forEach(element => {
             observer.observe(element);
         });
+
+        // Vimeo background video fade-in
+        const heroVideoFrame = document.querySelector('#hero-video');
+        if (heroVideoFrame) {
+            const player = new Vimeo.Player(heroVideoFrame);
+
+            player.on('playing', function() {
+                heroVideoFrame.style.opacity = 1;
+            });
+        }
     </script>
 
 </body>
