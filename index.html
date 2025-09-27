@@ -34,7 +34,6 @@
             height: 100%;
             overflow: hidden;
             z-index: 1;
-            /* Placeholder background for smooth loading */
             background-image: url('https://placehold.co/1920x1080/111827/111827.png');
             background-size: cover;
             background-position: center;
@@ -49,7 +48,6 @@
             left: 50%;
             transform: translate(-50%, -50%) scale(1.1);
             filter: blur(8px);
-            /* Start transparent and fade in */
             opacity: 0;
             transition: opacity 1s ease-in-out;
         }
@@ -62,15 +60,53 @@
             background-color: rgba(10, 10, 10, 0.6);
             z-index: 2;
         }
-        /* Trending animation styles */
+        /* Advanced animation styles */
         .scroll-reveal {
             opacity: 0;
-            transform: translateY(20px) scale(0.98);
-            transition: opacity 0.5s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transform: translateY(30px) scale(0.98);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform; /* Performance optimization */
         }
         .scroll-reveal.is-visible {
             opacity: 1;
             transform: translateY(0) scale(1);
+        }
+        
+        /* New Staggered Animation for Portfolio Cards */
+        .portfolio-card .video-wrapper,
+        .portfolio-card .card-content h3,
+        .portfolio-card .card-content p {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .portfolio-card.is-visible .video-wrapper {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.1s;
+        }
+
+        .portfolio-card.is-visible .card-content h3 {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.2s;
+        }
+        
+        .portfolio-card.is-visible .card-content p {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.3s;
+        }
+
+        /* Portfolio card hover effect */
+        .portfolio-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .portfolio-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(129, 140, 248, 0.3);
         }
     </style>
 </head>
@@ -134,33 +170,87 @@
                 <div class="grid grid-cols-1 lg:grid-cols-1 gap-12 max-w-4xl mx-auto">
                     
                     <!-- Major Project: Aaina Orientation Video (Landscape) -->
-                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg scroll-reveal">
-                        <div style="padding:56.15% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1113953189?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Final oriantation_1"></iframe></div>
-                        <div class="p-6">
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg portfolio-card scroll-reveal">
+                        <div class="video-wrapper">
+                            <div style="padding:56.15% 0 0 0;position:relative;"><iframe loading="lazy" src="https://player.vimeo.com/video/1113953189?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Final oriantation_1"></iframe></div>
+                        </div>
+                        <div class="p-6 card-content">
                             <h3 class="text-xl font-semibold text-white mb-2">Aaina Community - College Orientation 2025</h3>
                             <p class="text-gray-400">My latest major project, an orientation video for the Aaina community at my college. This video was crafted to welcome new students and showcase the spirit of the community.</p>
                         </div>
                     </div>
 
                     <!-- Video 2: Dynamic Event (Portrait) -->
-                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg scroll-reveal" style="transition-delay: 100ms;">
-                        <div style="padding:177.78% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1113951668?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Orientation FInal AE"></iframe></div>
-                        <div class="p-6">
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg portfolio-card scroll-reveal" style="transition-delay: 100ms;">
+                        <div class="video-wrapper">
+                            <div style="padding:177.78% 0 0 0;position:relative;"><iframe loading="lazy" src="https://player.vimeo.com/video/1113951668?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Orientation FInal AE"></iframe></div>
+                        </div>
+                        <div class="p-6 card-content">
                             <h3 class="text-xl font-semibold text-white mb-2">Dynamic Event Coverage & Recap</h3>
                             <p class="text-gray-400">Capturing the energy of live events with high-impact editing, sound design, and motion graphics to create unforgettable recaps.</p>
                         </div>
                     </div>
 
-                    <!-- Video 3: Utkarsh 2025 (Portrait) -->
-                     <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg scroll-reveal" style="transition-delay: 200ms;">
-                        <div style="padding:177.78% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1113952017?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Aaina x Utkarsh"></iframe></div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-white mb-2">Utkarsh 2025 Event Highlight</h3>
-                            <p class="text-gray-400">A fast-paced, energetic highlight reel showcasing the key moments of the Utkarsh 2025 college event.</p>
+                    <!-- Video 3: Advanced Instagram Reel -->
+                     <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg portfolio-card scroll-reveal" style="transition-delay: 200ms;">
+                        <div class="video-wrapper">
+                            <div style="padding:177.78% 0 0 0;position:relative;"><iframe loading="lazy" src="https://player.vimeo.com/video/1122490024?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Owen Cooper With CC"></iframe></div>
+                        </div>
+                        <div class="p-6 card-content">
+                            <h3 class="text-xl font-semibold text-white mb-2">Advanced Instagram Reel Edit</h3>
+                            <p class="text-gray-400">A high-energy edit showcasing advanced techniques like time remapping, seamless transitions, and effects from specialized plugins.</p>
                         </div>
                     </div>
 
+                     <!-- Video 4: IITR Zonals -->
+                     <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg portfolio-card scroll-reveal" style="transition-delay: 300ms;">
+                        <div class="video-wrapper">
+                            <div style="padding:177.78% 0 0 0;position:relative;"><iframe loading="lazy" src="https://player.vimeo.com/video/1122490938?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="IITR Zonals Edit"></iframe></div>
+                        </div>
+                        <div class="p-6 card-content">
+                            <h3 class="text-xl font-semibold text-white mb-2">IITR Zonals - Fast-Paced Event Coverage</h3>
+                            <p class="text-gray-400">High-energy coverage of the IITR Zonals, featuring rapid cuts, fast-paced edits, and dynamic animations to capture the event's excitement.</p>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- More Projects Section -->
+                <h3 class="text-2xl font-bold text-white text-center mt-20 mb-12 scroll-reveal">More Projects</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- More Project 1: Utkarsh 2025 -->
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg portfolio-card scroll-reveal">
+                        <div class="video-wrapper">
+                            <div style="padding:177.78% 0 0 0;position:relative;">
+                                <iframe loading="lazy" src="https://player.vimeo.com/video/1113952017?title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                            </div>
+                        </div>
+                        <div class="p-6 card-content">
+                            <h3 class="text-xl font-semibold text-white">Utkarsh 2025 Event Highlight</h3>
+                        </div>
+                    </div>
+                    <!-- More Project 2 -->
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg portfolio-card scroll-reveal" style="transition-delay: 100ms;">
+                         <div class="video-wrapper">
+                            <div style="padding:177.78% 0 0 0;position:relative;"><iframe loading="lazy" src="https://player.vimeo.com/video/1122495229?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Normal People Final"></iframe></div>
+                        </div>
+                        <div class="p-6 card-content">
+                            <h3 class="text-xl font-semibold text-white">Advanced Face Tracking & Animation</h3>
+                        </div>
+                    </div>
+                    
+                    <!-- More Project 4 (Expanded) -->
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg portfolio-card scroll-reveal sm:col-span-2" style="transition-delay: 200ms;">
+                         <div class="video-wrapper">
+                            <div class="video-aspect">
+                               <iframe loading="lazy" src="https://player.vimeo.com/video/1113970872?title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="p-6 card-content">
+                            <h3 class="text-xl font-semibold text-white">Orientation Outro</h3>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -324,3 +414,4 @@
 
 </body>
 </html>
+
